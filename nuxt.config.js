@@ -1,8 +1,9 @@
 export default {
-  mode: 'spa',
   /*
   ** Headers of the page
   */
+ target: "static",
+ mode: "universal",
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -14,6 +15,26 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  content: {
+    markdown: {
+      prism: {
+        theme: false,
+      },
+    },
+  },
+  // generate: {
+  //   async routes () {
+  //     // next comment to make VSCode ignore the "error"
+  //     // @ts-ignore
+  //     const { $content } = require('@nuxt/content')
+  //     const pages = await $content().only(['path']).fetch()
+  //     // const posts = await $content('pages').only(['path']).fetch()
+      
+  //     const files = [...pages]
+
+  //     return files.map(file => file.path === '/index' ? '/' : file.path)
+  //   }
+  // },
   
   /*
   ** Customize the progress-bar color
@@ -35,34 +56,69 @@ export default {
   buildModules: [
         // Simple usage
         '@nuxtjs/vuetify',
+        "@nuxt/components"
  
   ],
+
+ 
+  components: true,
+  
+  // /*
+  //  ** Nuxt content renderer
+  //  */
+  // content: {
+  //   apiPrefix: 'pages',
+  //   dir: 'content/pages',
+  //   liveEdit: false,
+  // },
+  /*
+   ** Allow parsing of markdown files
+   */
+  markdownit: {
+    injected: true,
+    html: true,
+    linkify: true,
+  },
   /*
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxt/content',
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    'nuxtjs-mdi-font'
+    'nuxtjs-mdi-font',
+
   ],
-  /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
-  axios: {
-  },
   /*
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
+    extend (config, { isClient }) {
+      if (isClient) {
+        config.module.rules.push(
+          {
+            enforce: 'pre',
+            test: /\.js$/,
+            loader: 'eslint-loader',
+            exclude: /(node_modules)/,
+            options: {
+              fix: true
+            }
+          },
+          {
+            enforce: 'pre',
+            test: /\.vue$/,
+            loader: 'eslint-loader',
+            exclude: /(node_modules)/,
+            options: {
+              fix: true
+            }
+        })
+      }
     }
   }
 }

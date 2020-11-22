@@ -1,114 +1,83 @@
 <template>
-  <v-container align-center fluid fill-height>
-    <v-row align-center justify="center">
-      <v-col lg="auto">
-    <v-row align-center justify="center">
-<span class="icon mdi mdi-skateboard"></span>
+  <v-container>
+    <v-row>
+      <v-col cols="6" start>
+        <p class="text-sm-left">
+          Walsh is curator and events organiser from Limerick, Ireland. He holds
+          a BA in Fine Art from Limerick School of Art and Design (2009 - 2013).
+          He is a former visual arts curator of The Belltable Arts Centre (2014)
+          and former venue technician at The Triskel Arts Centre, Cork (2015).
+          He has worked for a number of festivals in management and technical
+          capacities including; Body & Soul Festival, Prima Volta Music and Arts
+          Festival, Sounds From a Safe Harbour, Cork Film Festival, Féile na
+          Gréine and Make a Move Festival. He is a founding member of music
+          collectives Prima Volta and Limerick Noise Collective.
+        </p></v-col
+      >
 
-       </v-row >  
-      <!-- <logo /> -->
-      <h2 >
-        Seans Scrabbler
-      </h2>
- 
-      <h5 v-if="content" >There are {{ content.words.length }} words to go through</h5>
- </v-col>
-    </v-row >  
+      <v-col cols="6">
+        <p class="text-sm-left">
+          He is chairperson of the board of directors of spacecraft artists
+          studios, a non-profit contemporary art studio in Limerick city. In
+          2019 he founded the non-profit initiative Anywhere Projects, promoting
+          art and music in unconventional spaces. He was selected as part of the
+          MAC Curatorial Directions programme 2019 in Belfast, New York and
+          Philadelphia. Caimin Walsh currently works as Projects Curator at
+          Ormston House (est. 2011) a cultural resource centre in the heart of
+          Limerick city.
+        </p>
+      </v-col>
 
-    
-    <v-row align-center justify="center">
-                      <!-- email -->
-                <v-text-field
-                  v-model="word_display"
-                  label=""
-              
-                  name="task"
-                   class="mx-5"
-                  disabled
-                >
-                </v-text-field>
-
-                 <v-text-field
-                  v-model="guess"
-               
-                  label="Enter Guess"
-                  name="guess"
-                  class="mx-5"
-                  required
-                >
-                </v-text-field>
-
-
-              </v-row >  
-
-          <v-row align-center justify="center">
-              <v-col cols='6'>
-                 <v-btn large  @click="scrabble()"> New Word </v-btn>
-              </v-col>  
-              <v-col cols='6'>
-                 <v-btn large @click="guess_answer()"> Check! </v-btn>
-              </v-col>
-            
-              </v-row >     
-
+      <v-row>
+        <v-col
+          v-for="(post, $index) in page"
+          :key="`${$index}`"
+          class="post max-w-sm rounded overflow-hidden shadow-lg flex flex-col"
+          cols="6"
+        >
+          <v-hover>
+            <template #default="{ hover }">
+              <v-card class="pa-4">
+                <v-img :src="require('~/assets/cork.jpg')"></v-img>
+                <h3>{{ post.title }}</h3>
+                <p class="text-gray-700 text-base">
+                  {{ post.description }}
+                </p>
+                <v-fade-transition>
+                  <v-overlay v-if="hover" absolute color="#036358">
+                    <!-- <v-btn>See more info</v-btn> -->
+                    <nuxt-link :to="'/pages/1-0'">
+                      <v-btn :to="post.path"
+                        >{{ post.id }} - See more info</v-btn
+                      ></nuxt-link
+                    >
+                  </v-overlay>
+                </v-fade-transition>
+              </v-card>
+            </template>
+          </v-hover>
+        </v-col>
+      </v-row>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
-import content from '../assets/content/scrabble_words.json'
 export default {
+  async asyncData({ $content }) {
+    const page = await $content('page').fetch()
+    return {
+      page,
+    }
+  },
   head() {
     return {
-      script: [{ src: 'https://identity.netlify.com/v1/netlify-identity-widget.js' }],
-    };
+      script: [
+        { src: 'https://identity.netlify.com/v1/netlify-identity-widget.js' },
+      ],
+    }
   },
-  components: {
-    Logo
-  },
-    data() {
-    return {
-      guess: '',
-      word_display: '',
-      answer: '',
-    }},
-  computed: {
-    content () {
-      return this.$store.state.home.data
-    },
-  },
-  mounted() {
-    this.scrabble()
-  },
-  methods:{
-     scrabble () {
-       console.log('scrabbling..',this.content.words)
-
-          console.log('length is..', this.content.words.length)
-          // choose random element
-          this.answer  = this.content.words[Math.floor(Math.random() * this.content.words.length)];
-
-
-          this.word_display =  this.answer.split('').sort().join('');
-
- console.log('jumbled is is..', this.word_display)
-
-  console.log('answer is is..', this.answer)
-     },
-          guess_answer () {
-       console.log('guessing..', this.guess)
-        console.log('answer..', this.answer)
-
-        if (this.guess === this.answer) {
-          console.log('this answer is correcnt..')
-          this.word_display = 'Correct!!! The answer is ' + this.answer + ''
-        }else{
-           this.word_display = 'Wrong!!! The answer is ' + this.answer+ ''
-        }
-     }
-  }
-};
+}
 </script>
 
 <style>
@@ -119,36 +88,65 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: green;
+  background-color: white;
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.v-application--wrap {
+  min-height: 100vh;
+  justify-content: center;
 }
 
-.links {
-  padding-top: 15px;
-}
-
-.icon{
- 
+.class {
+  .list-complete-item {
+    width: 400px;
+    height: 300px;
+    display: inline-block;
+  }
+  .list-complete-item a {
+    display: inline-block;
+    position: relative;
+    width: 400px;
+    height: 300px;
+  }
+  .list-complete-item a .image {
+    display: block;
     width: 100%;
-        font-size: 137px;
-    color: var(--primary-text-color);
+    height: auto;
+  }
+  .list-complete-item a .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: 0.5s ease;
+    background-color: #008cba;
+  }
+  .list-complete-item a:hover .overlay {
+    opacity: 1;
+  }
+  .list-complete-item a .text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
 }
-
 </style>

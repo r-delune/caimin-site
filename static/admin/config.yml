@@ -22,3 +22,37 @@ collections:
           - { label: 'Subtitle', name: 'subtitle', widget: 'string' }
           - { label: 'Link_1', name: 'link_1', widget: 'string' }
           - { label: 'Link_2', name: 'link_2', widget: 'string' }
+
+    # Define content within each module page
+    - name: 'Module Content'
+      label: 'Module Content'
+      folder: '/front/assets/content/pages'
+      identifier_field: id
+      extension: 'md'
+      label_singular: 'Module Page'
+      description: >
+          Create pages here within each module. Remember that flow to each page is not linear - users will be directed to the next page based on the decision tree logic described elsewhere.
+      # create: true
+      editor:
+          preview: false
+      collapsed: true
+      fields:
+          - {
+                label: 'ID',
+                name: 'id',
+                widget: 'string',
+                hint: 'This is the ID of the page which will be referenced in the decision tree',
+            }
+          - {
+                label: 'Title',
+                name: 'title',
+                required: false,
+                widget: 'string',
+                hint: 'Title describing the page content',
+            }
+          - {
+                label: 'Page Body',
+                name: 'body',
+                widget: 'markdown',
+                hint: 'One list per page. List items must be delimited by a comma',
+            }
