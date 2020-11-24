@@ -1,33 +1,26 @@
 <template>
   <div>
-    <v-card class="title_card mx-5">
-      <v-row class="title_card mx-5">
-        <v-toolbar-title>
-          <div class="title">
-            <b> CAIMIN WALSH</b>
-          </div>
-        </v-toolbar-title>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-row class="title_card mx-5">
+          <h1 class="mx-5">CAIMIN WALSH</h1>
+          <v-spacer></v-spacer>
 
-        <v-spacer></v-spacer>
-        <v-toolbar-title>
-          <nuxt-link :to="'about/'">
-            <v-btn>About</v-btn>
+          <nuxt-link :to="'/'">
+            <v-btn rounded text>Home</v-btn>
           </nuxt-link>
-        </v-toolbar-title>
-        <v-toolbar-title>
-          <nuxt-link :to="'about/'">
-            <v-btn>Instagram</v-btn></nuxt-link
-          ></v-toolbar-title
-        >
-        <v-toolbar-title>
-          <nuxt-link :to="'about/'"
-            ><v-btn>CV</v-btn></nuxt-link
-          ></v-toolbar-title
-        >
 
-        <!-- </v-toolbar> -->
-      </v-row>
-    </v-card>
+          <nuxt-link :to="'about/'">
+            <v-btn rounded text>About</v-btn>
+          </nuxt-link>
+
+          <nuxt-link :to="'about/'">
+            <v-btn rounded text>Instagram</v-btn></nuxt-link
+          >
+          <nuxt-link :to="'about/'"><v-btn rounded text>CV</v-btn></nuxt-link>
+        </v-row>
+      </v-container>
+    </v-content>
     <div>
       <nuxt />
     </div>
@@ -44,6 +37,7 @@
 }
 
 .title_card {
+  border-bottom: 1px solid #aaa;
 }
 
 .title {

@@ -1,8 +1,8 @@
 <template>
-  <v-container>
-    <v-row>
+  <v-container align-center fill-height>
+    <v-row align-center justify="center">
       <v-col cols="6" start>
-        <p class="text-sm-left">
+        <p class="text-sm-left text_color">
           Walsh is curator and events organiser from Limerick, Ireland. He holds
           a BA in Fine Art from Limerick School of Art and Design (2009 - 2013).
           He is a former visual arts curator of The Belltable Arts Centre (2014)
@@ -16,7 +16,7 @@
       >
 
       <v-col cols="6">
-        <p class="text-sm-left">
+        <p class="text-sm-left text_color">
           He is chairperson of the board of directors of spacecraft artists
           studios, a non-profit contemporary art studio in Limerick city. In
           2019 he founded the non-profit initiative Anywhere Projects, promoting
@@ -28,36 +28,42 @@
         </p>
       </v-col>
 
-      <v-row>
-        <v-col
-          v-for="(post, $index) in page"
-          :key="`${$index}`"
-          class="post max-w-sm rounded overflow-hidden shadow-lg flex flex-col"
-          cols="6"
-        >
-          <v-hover>
-            <template #default="{ hover }">
-              <v-card class="pa-4">
-                <v-img :src="require('~/assets/cork.jpg')"></v-img>
-                <h3>{{ post.title }}</h3>
-                <p class="text-gray-700 text-base">
-                  {{ post.description }}
-                </p>
-                <v-fade-transition>
-                  <v-overlay v-if="hover" absolute color="#036358">
-                    <!-- <v-btn>See more info</v-btn> -->
-                    <nuxt-link :to="'/pages/1-0'">
-                      <v-btn :to="post.path"
-                        >{{ post.id }} - See more info</v-btn
-                      ></nuxt-link
-                    >
-                  </v-overlay>
-                </v-fade-transition>
-              </v-card>
-            </template>
-          </v-hover>
-        </v-col>
-      </v-row>
+      <v-container>
+        <v-row>
+          <v-col
+            v-for="(post, $index) in page"
+            :key="`${$index}`"
+            cols="auto"
+            md="6"
+            lg="6"
+            sm="12"
+          >
+            <v-hover>
+              <template #default="{ hover }">
+                <v-card fill-height class="d-flex flex-column">
+                  <v-img
+                    height="500"
+                    contain
+                    :src="require('~/assets/cork.jpg')"
+                  ></v-img>
+                  <v-card-title>{{ post.title }}</v-card-title>
+                  <v-card-subtitle class="flex-grow-1">
+                    {{ post.description }}
+                  </v-card-subtitle>
+                  <v-fade-transition>
+                    <v-overlay v-if="hover" absolute color="#036358">
+                      <!-- <v-btn>See more info</v-btn> -->
+                      <nuxt-link :to="'/pages/1-0'">
+                        <v-btn :to="post.path">More info</v-btn></nuxt-link
+                      >
+                    </v-overlay>
+                  </v-fade-transition>
+                </v-card>
+              </template>
+            </v-hover>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-row>
   </v-container>
 </template>
@@ -80,17 +86,7 @@ export default {
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: white;
-}
-
+<style scoped>
 .v-card--reveal {
   align-items: center;
   bottom: 0;
@@ -99,13 +95,13 @@ export default {
   position: absolute;
   width: 100%;
 }
-
+/* 
 .v-application--wrap {
   min-height: 100vh;
   justify-content: center;
-}
+} */
 
-.class {
+/* .class {
   .list-complete-item {
     width: 400px;
     height: 300px;
@@ -148,5 +144,11 @@ export default {
     transform: translate(-50%, -50%);
     text-align: center;
   }
+} */
+
+.text_color {
+  font-size: 16px;
+  color: #1361de;
+  font-weight: 600;
 }
 </style>

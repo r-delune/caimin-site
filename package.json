@@ -22,7 +22,6 @@
     "@nuxtjs/vuetify": "^1.11.2",
     "bootstrap": "^4.1.3",
     "bootstrap-vue": "^2.0.0",
-    "netlify-cms": "^2.10.32",
     "nuxt": "^2.0.0",
     "nuxtjs-mdi-font": "^1.0.2"
   },
@@ -37,6 +36,8 @@
     "eslint-plugin-vue": "^7.1.0",
     "gh-pages": "^2.2.0",
     "jest": "^24.1.0",
+    "netlify-cms": "^2.10.68",
+    "nuxt-netlify-cms": "^4.0.0",
     "prettier": "^2.2.0",
     "vue-jest": "^4.0.0-0"
   }

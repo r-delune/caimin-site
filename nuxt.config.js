@@ -3,7 +3,8 @@ export default {
   ** Headers of the page
   */
  target: "static",
- mode: "universal",
+ mode: "spa",
+ ssr: false,
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -41,9 +42,11 @@ export default {
   */
   loading: { color: '#fff' },
   /*
-  ** Global CSS
-  */
+   ** Global CSS
+   */
   css: [
+    '@mdi/font/css/materialdesignicons.css',
+    { src: '~assets/styles/fonts.scss', lang: 'scss' },
   ],
   /*
   ** Plugins to load before mounting the App
@@ -91,8 +94,12 @@ export default {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     'nuxtjs-mdi-font',
-
+    // 'nuxt-netlify-cms',
   ],
+  // You can optionally use global options instead of inline form
+  // netlifyCms: {
+  //   adminPath: "secure"
+  // },
   /*
   ** Build configuration
   */
