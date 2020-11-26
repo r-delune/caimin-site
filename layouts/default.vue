@@ -1,26 +1,30 @@
 <template>
   <div>
-    <v-content>
-      <v-container fluid fill-height>
-        <v-row class="title_card mx-5">
-          <h1 class="mx-5">CAIMIN WALSH</h1>
-          <v-spacer></v-spacer>
-
-          <nuxt-link :to="'/'">
-            <v-btn rounded text>Home</v-btn>
-          </nuxt-link>
-
-          <nuxt-link :to="'about/'">
-            <v-btn rounded text>About</v-btn>
-          </nuxt-link>
-
-          <nuxt-link :to="'about/'">
-            <v-btn rounded text>Instagram</v-btn></nuxt-link
+    <v-main>
+      <v-container>
+        <v-hover v-slot="{ hover }" open-delay="200">
+          <v-row
+            no-gutters
+            :color="hover ? 'blue' : 'red'"
+            class="title_card mx-2 pa-4"
+            align-end
+            fill-height
+            ustify-space-between
           >
-          <nuxt-link :to="'about/'"><v-btn rounded text>CV</v-btn></nuxt-link>
-        </v-row>
+            <v-col cols="6">
+              <span><h2>CAIMIN WALSH</h2></span></v-col
+            >
+            <v-spacer></v-spacer>
+            <v-col cols="5">
+              <!-- <v-btn small nuxt :to="'/'" text>Home</v-btn> -->
+              <v-btn small nuxt :to="'/about'" text>About</v-btn>
+              <v-btn small nuxt :to="'/ssds'" text>Instagram</v-btn>
+              <v-btn small nuxt :to="'/ffsd'" text>CV</v-btn>
+            </v-col>
+          </v-row>
+        </v-hover>
       </v-container>
-    </v-content>
+    </v-main>
     <div>
       <nuxt />
     </div>
@@ -38,6 +42,7 @@
 
 .title_card {
   border-bottom: 1px solid #aaa;
+  padding: 70px 0px 0px 0px;
 }
 
 .title {
@@ -56,5 +61,9 @@
 .v-application--wrap {
   min-height: 100vh;
   justify-content: center;
+}
+
+.hover {
+  color: blue;
 }
 </style>

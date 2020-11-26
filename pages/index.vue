@@ -1,7 +1,7 @@
 <template>
   <v-container align-center fill-height>
-    <v-row align-center justify="center">
-      <v-col cols="6" start>
+    <v-row column wrap align-center justify="center">
+      <v-col xl="6" lg="6" md="12" sm="12" xs="12" fluid>
         <p class="text-sm-left text_color">
           Walsh is curator and events organiser from Limerick, Ireland. He holds
           a BA in Fine Art from Limerick School of Art and Design (2009 - 2013).
@@ -15,7 +15,7 @@
         </p></v-col
       >
 
-      <v-col cols="6">
+      <v-col xl="6" lg="6" md="12" sm="12" xs="12">
         <p class="text-sm-left text_color">
           He is chairperson of the board of directors of spacecraft artists
           studios, a non-profit contemporary art studio in Limerick city. In
@@ -38,13 +38,13 @@
             lg="6"
             sm="12"
           >
+            <!-- {{ $index }}{{ post.title }} -->
             <v-hover>
               <template #default="{ hover }">
                 <v-card fill-height class="d-flex flex-column">
                   <v-img
                     height="500"
-                    contain
-                    :src="require('~/assets/cork.jpg')"
+                    :src="require('~/assets/images/' + post.img)"
                   ></v-img>
                   <v-card-title>{{ post.title }}</v-card-title>
                   <v-card-subtitle class="flex-grow-1">
@@ -53,8 +53,9 @@
                   <v-fade-transition>
                     <v-overlay v-if="hover" absolute color="#036358">
                       <!-- <v-btn>See more info</v-btn> -->
-                      <nuxt-link :to="'/pages/1-0'">
-                        <v-btn :to="post.path">More info</v-btn></nuxt-link
+
+                      <v-btn :to="post.path" nuxt
+                        >More info {{ post.path }}</v-btn
                       >
                     </v-overlay>
                   </v-fade-transition>

@@ -6,7 +6,7 @@
     </ul>
     <!-- {{ page }} -->
     <!-- <page> -->
-    <!-- <nuxt-content :document="page" /> -->
+    <nuxt-content :document="page" />
     <!-- </page> -->
 
     <div class="blog container mx-auto">

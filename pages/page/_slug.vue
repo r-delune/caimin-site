@@ -15,7 +15,7 @@
 
             <!-- <div class="overline mb-4">Projects</div> -->
             <v-list-item-title class="headline mb-1 title_color">
-              {{ page[0].title }}
+              {{ page[0] }}
             </v-list-item-title>
             <v-list-item-subtitle> </v-list-item-subtitle>
           </v-list-item-content>
@@ -26,6 +26,7 @@
           <v-col cols="6">
             <div class="d-flex flex-no-wrap justify-space-between">
               <v-card-text>
+                <nuxt-content :document="page" />
                 Back The Museum of Mythological Water Beasts (2017–) is a
                 multi-year project bringing together artists and communities to
                 learn about the River Shannon. In 2021, a programme of River
@@ -41,10 +42,16 @@
               </v-card-text>
             </div>
           </v-col>
-          <v-col v-for="(post, $index) in 1" :key="`${$index}`" cols="6">
-            <v-img :src="require('~/assets/cork.jpg')"></v-img>
+          <v-col v-for="(post, index) in 1" :key="`${index}`" cols="6">
+            <!-- <v-img src="require(~/assets/images/image"+index)"></v-img> -->
+            <!-- <v-img :src="require('~/assets/images/image0.jpg')"></v-img> -->
+            <!-- <v-img
+              :src="require('~/assets/images/image' + index + '.jpg')"
+            ></v-img> -->
+            <!-- <v-img :src="require('~/assets/images/image0')"></v-img> -->
           </v-col>
         </v-row>
+
         <!-- <v-card-actions>
           <v-btn :to="'/'" outlined rounded text> Button </v-btn>
         </v-card-actions> -->
@@ -58,8 +65,11 @@ export default {
   name: 'Page',
   // Dynamically create this page based on contents on component folder
   async asyncData({ $content, params, error }) {
-    const slug = params.page
-    const page = await $content(slug)
+    const slug = params.page || 'index'
+    // console.log('SLUG', slug)
+    // console.log('$content', $content)
+    // console.log('$error', error)
+    const page = await $content('1-0')
       .fetch()
       .catch((err) => {
         error({
