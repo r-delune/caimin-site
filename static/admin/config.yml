@@ -15,7 +15,7 @@ collections:
   #
   # GENERAL PAGES
   #
-  - label: 'General Pages'
+  - label: 'General'
     name: 'main'
     label_singular: 'Site Page'
     delete: false
@@ -63,26 +63,26 @@ collections:
                   hint: 'Add body info'
                 }
 
-  - name: "other" # Used in routes, e.g., /admin/collections/blog
-    label: "Ideas/Other" # Used in the UI
-    format: 'frontmatter'
-     description: >
-      Jot down ideas/links here, or add content for pages that dont exist yet
-    
-    # editor:
-    #   preview: true
-    folder: "content/site" # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    slug: "{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    fields: # The fields for each document, usually in front matter
-      - {label: "Title", name: "title", widget: "string" , hint:"ddddd"}
-      # - {label: "Description", name: "description", widget: "string"}
-      # - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
-      - {label: "Idea", name: "body", widget: "markdown", hint: "Jot down ideas or requirements here and il come back to them"} 
+  # - name: other
+  #   label: "Ideas/Other" # Used in the UI
+  #   format: 'frontmatter'
+  #    description: >
+  #     Jot down ideas/links here, or add content for pages that dont exist yet
+  #   # editor:
+  #   #   preview: true
+  #   folder: "content/site" # The path to the folder where the documents are stored
+  #   create: true # Allow users to create new documents in this collection
+  #   slug: "{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+  #   fields: # The fields for each document, usually in front matter
+  #       - {label: "Title", name: "title", widget: "string" , hint:"ddddd"}
+  #       # - {label: "Description", name: "description", widget: "string"}
+  #       # - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
+  #       - {label: "Idea", name: "body", widget: "markdown", hint: "Jot down ideas or requirements here and il come back to them"} 
 
-  - name: 'Section Content'
-    label: 'page'
+  - name: 'Content'
+    label: 'Section'
     folder: "content/page"
+    # label_singular: 'Section'
     format: 'frontmatter'
     # editor:
     #   preview: true
