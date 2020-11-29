@@ -31,7 +31,6 @@ export default {
   }),
   methods: {
     getImg(img) {
-      console.log('we gettign ', +img)
       var path = img.split('/images/').pop()
       return `/images/${path}`
     },

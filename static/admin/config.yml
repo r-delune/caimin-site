@@ -9,7 +9,7 @@ backend:
 site_url: https://modest-shockley-8d41ba.netlify.app/
 media_folder: "static/images"
 public_folder: "/images/uploads"
-publish_mode: editorial_workflow
+# publish_mode: editorial_workflow
 
 collections:
   #
@@ -21,7 +21,7 @@ collections:
     delete: false
     create: true
     description: >
-      This is text for main pages, nav etc. Markdown styling can be added to page body https://guides.github.com/features/mastering-markdown/.
+      This is text for main pages, nav etc. Markdown styling can be added to page body https://guides.github.com/features/mastering-markdown/. Once publish (set to ready, publish) wait five minutes for the site to go live. Preview links TBD
     files:
         # Home
         - label: 'Home'
@@ -66,6 +66,9 @@ collections:
   - name: "other" # Used in routes, e.g., /admin/collections/blog
     label: "Ideas/Other" # Used in the UI
     format: 'frontmatter'
+     description: >
+      Jot down ideas/links here, or add content for pages that dont exist yet
+    
     # editor:
     #   preview: true
     folder: "content/site" # The path to the folder where the documents are stored
@@ -78,7 +81,7 @@ collections:
       - {label: "Idea", name: "body", widget: "markdown", hint: "Jot down ideas or requirements here and il come back to them"} 
 
   - name: 'Section Content'
-    label: 'Section Content'
+    label: 'page'
     folder: "content/page"
     format: 'frontmatter'
     # editor:

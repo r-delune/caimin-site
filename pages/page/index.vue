@@ -36,7 +36,6 @@
 <script>
 export default {
   async asyncData({ $content, params, error }) {
-    console.log('SLUdddD ', params)
     const slug = params.page || 'main/home'
     const page = await $content(slug)
       .fetch()

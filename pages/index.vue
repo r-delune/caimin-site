@@ -13,6 +13,7 @@
       >
         <nuxt-content :document="page" />
       </v-col>
+
       <v-container>
         <v-row>
           <v-col
@@ -23,6 +24,7 @@
             lg="6"
             sm="12"
           >
+            <!-- {{ post }} -->
             <v-hover>
               <template #default="{ hover }">
                 <v-card fill-height class="d-flex flex-column">
@@ -72,7 +74,6 @@ export default {
   },
   methods: {
     getImg(img) {
-      console.log('we gettign ', +img)
       var path = img.split('/images/').pop()
       return `/images/${path}`
     },
