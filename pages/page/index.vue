@@ -36,8 +36,9 @@
 <script>
 export default {
   async asyncData({ $content, params, error }) {
-    const slug = params.page || 'index'
-    const page = await $content('page')
+    console.log('SLUdddD ', params)
+    const slug = params.page || 'main/home'
+    const page = await $content(slug)
       .fetch()
       .catch((err) => {
         error({
@@ -49,5 +50,8 @@ export default {
       page,
     }
   },
+  data: () => ({
+    altImage: '',
+  }),
 }
 </script>

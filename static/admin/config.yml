@@ -3,23 +3,71 @@ backend:
   name: github
   branch: master
   repo: r-delune/caimin-site
-editor:
-  show_preview_links: true
+# editor:
+#   show_preview_links: true
 
-media_folder: /assets/images
-public_folder: /assets/images
+site_url: https://modest-shockley-8d41ba.netlify.app/
+media_folder: "static/images"
+public_folder: "/images/uploads"
+publish_mode: editorial_workflow
 
 collections:
   #
-  # GENERAL PAGES #######################################################
+  # GENERAL PAGES
   #
-
+  - label: 'General Pages'
+    name: 'main'
+    label_singular: 'Site Page'
+    delete: false
+    create: true
+    description: >
+      This is text for main pages, nav etc. Markdown styling can be added to page body https://guides.github.com/features/mastering-markdown/.
+    files:
+        # Home
+        - label: 'Home'
+          name: 'Home'
+          format: 'frontmatter'
+          file: '/content/main/index.md'
+          fields:
+              - { label: 'Title', name: 'title', widget: 'text' }
+              - {
+                  label: 'Page Body',
+                  name: 'body',
+                  widget: 'markdown',
+                  hint: 'Add body info'
+                }
+        # About
+        - label: 'About'
+          name: 'About'
+          format: 'frontmatter'
+          file: '/content/main/about.md'
+          fields:
+              - { label: 'Title', name: 'title', widget: 'text' }
+              - {
+                  label: 'Page Body',
+                  name: 'body',
+                  widget: 'markdown',
+                  hint: 'Add body info'
+                }
+        # CV
+        - label: 'CV'
+          name: 'CV'
+          format: 'frontmatter'
+          file: '/content/main/cv.md'
+          fields:
+              - { label: 'Title', name: 'title', widget: 'text' }
+              - {
+                  label: 'Page Body',
+                  name: 'body',
+                  widget: 'markdown',
+                  hint: 'Add body info'
+                }
 
   - name: "other" # Used in routes, e.g., /admin/collections/blog
     label: "Ideas/Other" # Used in the UI
     format: 'frontmatter'
-    editor:
-      preview: true
+    # editor:
+    #   preview: true
     folder: "content/site" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
@@ -29,34 +77,79 @@ collections:
       # - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
       - {label: "Idea", name: "body", widget: "markdown", hint: "Jot down ideas or requirements here and il come back to them"} 
 
-  - name: "site" # Used in routes, e.g., /admin/collections/blog
-    label: "Site Pages" # Used in the UI
+  - name: 'Section Content'
+    label: 'Section Content'
+    folder: "content/page"
     format: 'frontmatter'
-    editor:
-      preview: true
-    folder: "content/site" # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    fields: # The fields for each document, usually in front matter
-      - {label: "Title", name: "title", widget: "string" , hint:"ddddd"}
-      - {label: "Description", name: "description", widget: "string"}
-      # - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
-      - {label: "Body", name: "body", widget: "markdown"} 
+    # editor:
+    #   preview: true
+    label_singular: 'Section'
+    description: >
+        Create additional sections here. Options to add video, links and audio below. Add styling to paragrahs yourself using markdown https://guides.github.com/features/mastering-markdown/.
+    create: true
+    fields:
+        - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
+        - {label: "Title", name: "title", widget: "string"}
+        - {label: "Description", name: "description", widget: "string"}
+        - {label: "Publish Date", name: "date", widget: "datetime"}
+        - {label: "Featured Image", name: "img", widget: "image"}
+        # - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
+        - {label: "Body", name: "body", widget: "markdown"} 
 
-  - name: "page" # Used in routes, e.g., /admin/collections/blog
-    label: "Page" # Used in the UI
-    format: 'frontmatter'
-    editor:
-      preview: true
-    folder: "content/page" # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-    fields: # The fields for each document, usually in front matter
-      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Link", name: "link", widget: "string"}
-      - {label: "Description", name: "description", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "img", widget: "image"}
-      # - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
-      - {label: "Body", name: "body", widget: "markdown"} 
+        # Multiple Choice Question
+        - label: 'SoundCloud Linker'
+          name: 'soundcloud'
+          widget: 'list'
+          description: >
+              'For now, to add a SC link, you will have to add both the public link (in URL bar), and the address shown after the src parameter in the embed link, in quoatation (:src="this bit")'
+          fields:
+              - {
+                    label: 'Public Link',
+                    name: 'public_link',
+                    required: false,
+                    widget: 'string',
+                }
+              - {
+                    label: 'Embed SRC Link',
+                    name: 'link',
+                    required: false,
+                    widget: 'string',
+                }
+
+        # Multiple Choice Question
+        - label: 'Video Linker'
+          name: 'video'
+          widget: 'list'
+          description: >
+              'Just using Vimeo for now, but can add youtube if you like'
+          fields:
+              - {
+                    label: 'Public Vimeo Link',
+                    name: 'video_id',
+                    required: false,
+                    widget: 'string',
+                }
+
+        # Further Resources
+        - label: 'Links'
+          name: 'links'
+          collapsed: true
+          widget: 'object'
+          hint: 'Add this to the page using:'
+          fields:
+              - label: 'Items'
+                name: 'items'
+                widget: 'list'
+                hint: 'Add a link item to a list'
+                fields:
+                    - { label: 'URL', name: 'url', widget: 'text' }
+                    - { label: 'Text', name: 'text', widget: 'text' }
+                    - { label: 'Icon', name: 'icon', widget: 'text', hint: icons found here https://materialdesignicons.com/, copy paste the image name in the bix }
+        # Sound
+        - {
+              label: 'Audio',
+              widget: 'string',
+              required: false,
+              name: 'audio',
+              hint: 'Add the URL to the audio here (try keep to the same stream service)',
+          }

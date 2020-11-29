@@ -16,10 +16,10 @@
             >
             <v-spacer></v-spacer>
             <v-col cols="5">
-              <!-- <v-btn small nuxt :to="'/'" text>Home</v-btn> -->
+              <v-btn small nuxt :to="'/'" text>Home</v-btn>
               <v-btn small nuxt :to="'/about'" text>About</v-btn>
-              <v-btn small nuxt :to="'/ssds'" text>Instagram</v-btn>
-              <v-btn small nuxt :to="'/ffsd'" text>CV</v-btn>
+              <v-btn small nuxt :to="'/about'" text>Instagram</v-btn>
+              <v-btn small nuxt :to="'/cv'" text>CV</v-btn>
             </v-col>
           </v-row>
         </v-hover>

@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    "types": [
-      "@nuxt/types",
-      "@nuxt/content"
-    ]
+      "types": ["@nuxt/types", "@nuxt/content"]
   }
 }

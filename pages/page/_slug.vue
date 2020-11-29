@@ -1,75 +1,86 @@
 <template>
   <div :id="page.id" :class="'page__' + page.id">
-    <!-- hello
-
-    {{ page }} -->
-
     <v-container>
       <v-card outlined>
         <v-list-item three-line>
           <v-list-item-content>
+            <!-- back button -->
             <v-list-item-title class="headline mb-1 title_color">
-              <v-icon> mdi-arrow-left </v-icon>
-              <v-btn :to="'/'" rounded text> Back </v-btn>
+              <nuxt-link :to="'/'">
+                <v-icon> mdi-arrow-left </v-icon>
+                <v-btn text nuxt> Back </v-btn></nuxt-link
+              >
             </v-list-item-title>
-
-            <!-- <div class="overline mb-4">Projects</div> -->
+            <!-- page title -->
             <v-list-item-title class="headline mb-1 title_color">
-              {{ page[0] }}
+              {{ page.title }}
             </v-list-item-title>
-            <v-list-item-subtitle> </v-list-item-subtitle>
+            <v-list-item-subtitle> {{ page.description }}</v-list-item-subtitle>
           </v-list-item-content>
-
           <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
         </v-list-item>
         <v-row>
-          <v-col cols="6">
+          <!-- main content -->
+          <v-col cols="auto" md="6" lg="6" sm="12" xs="12">
             <div class="d-flex flex-no-wrap justify-space-between">
               <v-card-text>
                 <nuxt-content :document="page" />
-                Back The Museum of Mythological Water Beasts (2017–) is a
-                multi-year project bringing together artists and communities to
-                learn about the River Shannon. In 2021, a programme of River
-                Residencies will connect artists with rural communities who live
-                and work along the river in Cavan, Clare, Limerick and
-                Tipperary, to create new artistic projects. The River
-                Residencies are a collaborative initiative led by Limerick
-                Culture and Arts Office and Ormston House in partnership with
-                Cavan Arts Office, Clare Arts Office and Tipperary Arts Office,
-                co-funded by the Arts Council of Ireland through An Invitation
-                to Collaboration. The River Residencies are co-curated by Caimin
-                Walsh and Mary Conlon from Ormston House.
               </v-card-text>
             </div>
           </v-col>
           <v-col v-for="(post, index) in 1" :key="`${index}`" cols="6">
-            <!-- <v-img src="require(~/assets/images/image"+index)"></v-img> -->
-            <!-- <v-img :src="require('~/assets/images/image0.jpg')"></v-img> -->
-            <!-- <v-img
-              :src="require('~/assets/images/image' + index + '.jpg')"
-            ></v-img> -->
-            <!-- <v-img :src="require('~/assets/images/image0')"></v-img> -->
+            <!-- image -->
+            <div v-if="page.img">
+              <v-img class="image" :src="getImg(page.img)" :alt="altImage" />
+            </div>
           </v-col>
         </v-row>
-
-        <!-- <v-card-actions>
-          <v-btn :to="'/'" outlined rounded text> Button </v-btn>
-        </v-card-actions> -->
+        <v-row>
+          <v-col cols="auto" md="6" lg="6" sm="12" xs="12">
+            <!-- display all audio link if the exist -->
+            <v-list-item-content>
+              <div v-if="page.soundcloud">
+                <v-col
+                  v-for="(post, index) in page.soundcloud"
+                  :key="`${index}`"
+                  cols="6"
+                >
+                  <iframe
+                    width="100%"
+                    height="166"
+                    scrolling="no"
+                    frameborder="no"
+                    allow="autoplay"
+                    :src="post.link"
+                  ></iframe>
+                </v-col>
+              </div>
+            </v-list-item-content>
+            <!-- display all videos if the exist -->
+            <v-list-item-content>
+              <div v-if="page.video">
+                <v-col
+                  v-for="(video, index) in page.video"
+                  :key="`${index}`"
+                  cols="6"
+                >
+                  <Video :video="video.video_id"></Video>
+                </v-col>
+              </div>
+            </v-list-item-content>
+          </v-col>
+        </v-row>
       </v-card>
     </v-container>
   </div>
 </template>
-
 <script>
 export default {
   name: 'Page',
   // Dynamically create this page based on contents on component folder
   async asyncData({ $content, params, error }) {
-    const slug = params.page || 'index'
-    // console.log('SLUG', slug)
-    // console.log('$content', $content)
-    // console.log('$error', error)
-    const page = await $content('1-0')
+    const slug = params.slug || 'home'
+    const page = await $content('page/' + slug)
       .fetch()
       .catch((err) => {
         error({
@@ -81,12 +92,21 @@ export default {
       page,
     }
   },
+  data: () => ({
+    altImage: '',
+  }),
   head() {
     return {
       htmlAttrs: {
         class: this.$vuetify.breakpoint.mobile ? 'mobile-font' : 'normal-font',
       },
     }
+  },
+  methods: {
+    getImg(img) {
+      var path = img.split('/images/').pop()
+      return `/images/${path}`
+    },
   },
 }
 </script>
@@ -107,5 +127,10 @@ export default {
   color: #1361de;
   font-size: xx-large;
   font-weight: bold;
+}
+
+image {
+  width: 100%;
+  height: 300px;
 }
 </style>

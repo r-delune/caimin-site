@@ -20,7 +20,7 @@
 <script>
 export default {
   async asyncData({ $content }) {
-    const page = await $content('main/about').fetch()
+    const page = await $content('main/cv').fetch()
     return {
       page,
     }
