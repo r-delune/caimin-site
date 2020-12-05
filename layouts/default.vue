@@ -15,7 +15,7 @@
               <span><h2>CAIMIN WALSH</h2></span></v-col
             >
             <v-spacer></v-spacer>
-            <v-col cols="5">
+            <v-col cols="6">
               <v-btn small nuxt :to="'/'" text>Home</v-btn>
               <v-btn small nuxt :to="'/about'" text>About</v-btn>
               <v-btn small nuxt :to="'/about'" text>Instagram</v-btn>
@@ -32,6 +32,10 @@
 </template>
 
 <style>
+body {
+  font-family: 'Alte Haas Grotesk';
+}
+
 .v-ripple__animation {
   display: none;
 }
@@ -43,10 +47,9 @@
 .title_card {
   border-bottom: 1px solid #aaa;
   padding: 70px 0px 0px 0px;
-}
-
-.title {
-  font-size: 35px;
+  font-family: 'Alte Haas Grotesk 700';
+  color: #1361de;
+  font-size: 25px;
 }
 
 .v-card--reveal {
@@ -64,6 +67,6 @@
 }
 
 .hover {
-  color: blue;
+  color: black;
 }
 </style>

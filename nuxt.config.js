@@ -4,7 +4,7 @@ export default {
    */
   target: 'static',
   mode: 'spa',
-  ssr: false,
+  ssr: true,
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -36,6 +36,7 @@ export default {
   css: [
     '@mdi/font/css/materialdesignicons.css',
     { src: '~assets/styles/fonts.scss', lang: 'scss' },
+    { src: '~assets/fonts/Alte Haas Grotesk.css', lang: 'css' },
   ],
   /*
    ** Plugins to load before mounting the App
