@@ -8,7 +8,7 @@ backend:
 
 site_url: https://modest-shockley-8d41ba.netlify.app/
 media_folder: "static/images"
-public_folder: "/images/uploads"
+public_folder: "/images"
 # publish_mode: editorial_workflow
 
 collections:

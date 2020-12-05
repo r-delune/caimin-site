@@ -6,17 +6,17 @@
           <v-row
             no-gutters
             :color="hover ? 'blue' : 'red'"
-            class="title_card mx-2 pa-4"
+            class="title_card mx-2"
             align-end
             fill-height
-            ustify-space-between
           >
-            <v-col cols="6">
+            <v-col cols="9">
               <span><h2>CAIMIN WALSH</h2></span></v-col
             >
-            <v-spacer></v-spacer>
-            <v-col cols="6">
-              <v-btn small nuxt :to="'/'" text>Home</v-btn>
+
+            <v-col cols="auto">
+              <v-spacer></v-spacer>
+              <!-- <v-btn small nuxt :to="'/'" text>Home</v-btn> -->
               <v-btn small nuxt :to="'/about'" text>About</v-btn>
               <v-btn small nuxt :to="'/about'" text>Instagram</v-btn>
               <v-btn small nuxt :to="'/cv'" text>CV</v-btn>
@@ -46,10 +46,12 @@ body {
 
 .title_card {
   border-bottom: 1px solid #aaa;
-  padding: 70px 0px 0px 0px;
+  padding: 76px 0px 0px 0px;
   font-family: 'Alte Haas Grotesk 700';
   color: #1361de;
-  font-size: 25px;
+  font-size: 45px;
+  font-size: 3rem;
+  /* font-size: 16px; */
 }
 
 .v-card--reveal {

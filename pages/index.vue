@@ -1,16 +1,7 @@
 <template>
   <v-container align-center fill-height>
-    <v-row column wrap align-center justify="center">
-      <v-col
-        class="text-sm-left text_color"
-        cols="12"
-        xl="12"
-        lg="12"
-        md="12"
-        sm="12"
-        xs="12"
-        column
-      >
+    <v-row>
+      <v-col class="text-sm-left text_color" column>
         <nuxt-content :document="page" />
       </v-col>
 
@@ -22,12 +13,13 @@
             cols="auto"
             md="6"
             lg="6"
-            sm="12"
+            sm="6"
+            column
           >
             <!-- {{ post }} -->
             <v-hover>
               <template #default="{ hover }">
-                <v-card fill-height class="d-flex flex-column">
+                <v-card min-height="240" fill-height class="d-flex flex-column">
                   <!-- image -->
                   <div v-if="post.img">
                     <v-img :src="getImg(post.img)" :alt="altImage" />
@@ -53,6 +45,7 @@
 
 <script>
 export default {
+  transition: 'fade',
   async asyncData({ $content }) {
     const page = await $content('main/index').fetch()
     const posts = await $content('page').fetch()
@@ -81,7 +74,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .v-card--reveal {
   align-items: center;
   bottom: 0;
@@ -92,8 +85,16 @@ export default {
 }
 
 .text_color {
-  font-size: 16px;
+  /* font-size: 16px; */
   color: #1361de;
-  font-weight: 600;
+  /* font-weight: 600; */
+}
+
+.nuxt-content {
+  display: flex;
+}
+
+.nuxt-content p {
+  padding: 0px 0px 0px 10px;
 }
 </style>
