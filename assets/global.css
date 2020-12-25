@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Alte4";
+    src: local("Alte4"),
+     url(~assets/fonts/Alte4.ttf) format("ttf");
+}
+
+@font-face {
+    font-family: "Alte7";
+    src: local("Alte7"),
+     url(~assets/fonts/Alte7.ttf) format("ttf");
+}
+
+
+html {
+    font-family: "Alte4";
+    background-color: lawngreen;
+}
+

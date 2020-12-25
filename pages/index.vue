@@ -1,7 +1,7 @@
 <template>
-  <v-container align-center fill-height>
+  <v-container>
     <v-row>
-      <v-col class="text-sm-left text_color" column>
+      <v-col column>
         <nuxt-content :document="page" />
       </v-col>
 
@@ -16,21 +16,31 @@
             sm="6"
             column
           >
-            <!-- {{ post }} -->
-            <v-hover>
+            <!-- <span class="blur-box-inner"> </span> -->
+
+            <v-hover class="my-overlay" @click.native="clickMe(post.path)">
               <template #default="{ hover }">
-                <v-card min-height="240" fill-height class="d-flex flex-column">
+                <v-card :elevation="0" class="d-flex flex-column">
                   <!-- image -->
                   <div v-if="post.img">
-                    <v-img :src="getImg(post.img)" :alt="altImage" />
+                    <v-img
+                      :max-height="'380px'"
+                      :src="getImg(post.img)"
+                      :alt="altImage"
+                    />
                   </div>
-                  <v-card-title>{{ post.title }}</v-card-title>
-                  <v-card-subtitle class="flex-grow-1">
-                    {{ post.description }}
-                  </v-card-subtitle>
+
                   <v-fade-transition>
-                    <v-overlay v-if="hover" absolute color="#036358">
-                      <v-btn :to="post.path" nuxt>More info </v-btn>
+                    <v-overlay
+                      v-if="hover"
+                      absolute
+                      class="my-overlay"
+                      color="#036358"
+                      @click.native="clickMe(post.path)"
+                    >
+                      <!-- {{ post }} -->
+                      <div class="panel-text">{{ post.title }}</div>
+                      <!-- <v-btn :to="post.path" text nuxt>{{ post.title }}</v-btn> -->
                     </v-overlay>
                   </v-fade-transition>
                 </v-card>
@@ -70,31 +80,57 @@ export default {
       var path = img.split('/images/').pop()
       return `/images/${path}`
     },
+    clickMe(path) {
+      console.log('click me', path)
+
+      console.log('going fome')
+      this.$router.push({
+        path: path,
+      })
+    },
   },
 }
 </script>
 
 <style>
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.5;
-  position: absolute;
-  width: 100%;
+.fade-enter-active,
+.fade-leave-active {
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+  transition-duration: 400ms;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 .text_color {
-  /* font-size: 16px; */
-  color: #1361de;
-  /* font-weight: 600; */
+  color: #1fb0ff;
+}
+
+.my-overlay {
+  cursor: pointer;
+}
+
+.my-overlay:hover {
+  cursor: pointer;
+  transform: scale(1.01);
 }
 
 .nuxt-content {
-  display: flex;
+  /* display: flex; */
+  /* color: #5e5e5e; */
+}
+
+.panel-text {
+  font-family: 'Alte Haas Grotesk 700';
+  font-size: 28px;
 }
 
 .nuxt-content p {
-  padding: 0px 0px 0px 10px;
+  /* color: grey;
+  font-size: 16px; */
+  padding: 0px 67px -1px 0px;
+  /* font-family: 'Alte Haas Grotesk 700'; */
 }
 </style>

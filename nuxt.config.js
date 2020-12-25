@@ -3,7 +3,6 @@ export default {
    ** Headers of the page
    */
   target: 'static',
-  mode: 'spa',
   ssr: true,
   head: {
     title: process.env.npm_package_name || '',
@@ -42,7 +41,8 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '@/plugins/vimeo-embed.js', ssr: false },
+    { src: '@/plugins/expandable-image.js', ssr: false },
+    { src: '@/plugins/youtube.js', ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules
@@ -93,9 +93,6 @@ export default {
    ** Build configuration
    */
   build: {
-    vendor: [
-      'vue-vimeo-player'
-    ],
     extend(config, { isClient }) {
       if (isClient) {
         config.module.rules.push(

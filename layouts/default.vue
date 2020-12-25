@@ -1,74 +1,174 @@
 <template>
   <div>
-    <v-main>
-      <v-container>
-        <v-hover v-slot="{ hover }" open-delay="200">
-          <v-row
-            no-gutters
-            :color="hover ? 'blue' : 'red'"
-            class="title_card mx-2"
-            align-end
-            fill-height
-          >
-            <v-col cols="9">
-              <span><h2>CAIMIN WALSH</h2></span></v-col
-            >
+    <!-- <v-app-bar app> -->
+    <v-container>
+      <v-row class="title_card">
+        <v-col
+          :class="$vuetify.breakpoint.mobile ? 'center-menu' : 'right-menu'"
+          cols="auto"
+          class="site_name"
+        >
+          <div class="margin" @click="goHome()">CAIMIN WALSH</div></v-col
+        >
+        <v-spacer v-if="!$vuetify.breakpoint.mobile"></v-spacer>
 
-            <v-col cols="auto">
-              <v-spacer></v-spacer>
-              <!-- <v-btn small nuxt :to="'/'" text>Home</v-btn> -->
-              <v-btn small nuxt :to="'/about'" text>About</v-btn>
-              <v-btn small nuxt :to="'/about'" text>Instagram</v-btn>
-              <v-btn small nuxt :to="'/cv'" text>CV</v-btn>
-            </v-col>
-          </v-row>
-        </v-hover>
+        <v-col
+          class="menu-items"
+          :class="$vuetify.breakpoint.mobile ? 'center-menu' : 'right-menu'"
+        >
+          <div
+            class="my-button"
+            color="#1361de"
+            text
+            nuxt
+            :to="'/'"
+            @click="goToPage('/')"
+          >
+            Home
+          </div>
+          <div
+            class="my-button"
+            color="#1361de"
+            text
+            nuxt
+            @click="goToLink('www.instagram.com')"
+          >
+            Instagram
+          </div>
+          <div
+            class="my-button"
+            color="#1361de"
+            text
+            nuxt
+            @click="goToPage('cv')"
+          >
+            CV
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+    <!-- </v-app-bar> -->
+    <v-main>
+      <v-container fluid>
+        <!-- <div class="image-blurred-edge"></div> -->
+        <nuxt />
       </v-container>
     </v-main>
-    <div>
-      <nuxt />
-    </div>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    goHome() {
+      console.log('going fome')
+      this.$router.push({
+        path: '/',
+      })
+    },
+    goToLink(url) {
+      console.log('going too link ', url)
+
+      window.open(url)
+    },
+    goToPage(url) {
+      console.log('going too page ', url)
+
+      this.$router.push({
+        path: url,
+      })
+    },
+  },
+}
+</script>
 
 <style>
 body {
   font-family: 'Alte Haas Grotesk';
+  background-color: #fff7fd;
 }
 
-.v-ripple__animation {
-  display: none;
+.theme--light.v-card {
+  background-color: #fff7fd;
 }
 
-.v-btn:hover:before {
+/* .v-btn:hover:before {
   background-color: transparent;
-}
+} */
 
 .title_card {
-  border-bottom: 1px solid #aaa;
-  padding: 76px 0px 0px 0px;
-  font-family: 'Alte Haas Grotesk 700';
-  color: #1361de;
-  font-size: 45px;
-  font-size: 3rem;
-  /* font-size: 16px; */
+  border-bottom: 3px solid #aaa;
+  border-color: #1fb0ff;
+  padding: 38px 4px 2px 0px;
 }
 
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.5;
-  position: absolute;
-  width: 100%;
-}
+/* .v-application {
+  background-color: green;
+} */
 
-.v-application--wrap {
+/* .v-application--wrap {
   min-height: 100vh;
   justify-content: center;
+} */
+
+.menu-items {
+  display: flex;
+  align-self: flex-end;
+  font-family: 'Alte Haas Grotesk 700';
+  color: #1fb0ff;
+  text-transform: capitalize;
+  font-size: 24px;
 }
 
-.hover {
-  color: black;
+.my-button {
+  padding: 23px 10px 7px;
+  cursor: pointer;
+}
+
+.my-button:hover {
+  color: #ffa1e0;
+  -webkit-transition: color 0.2s ease-out;
+  -moz-transition: color 0.2s ease-out;
+  -o-transition: color 0.2s ease-out;
+  -ms-transition: color 0.2s ease-out;
+  transition: color 0.2s ease-out;
+  cursor: pointer;
+}
+
+.site_name {
+  color: #1fb0ff;
+  font-size: 46px;
+  font-family: 'Alte Haas Grotesk 700';
+}
+
+.site_name:hover {
+  color: #ffa1e0;
+  -webkit-transition: color 0.2s ease-out;
+  -moz-transition: color 0.2s ease-out;
+  -o-transition: color 0.2s ease-out;
+  -ms-transition: color 0.2s ease-out;
+  transition: color 0.2s ease-out;
+  cursor: pointer;
+}
+
+.image-blurred-edge {
+  /* background-image: url('http://lorempixel.com/200/200/city/9');
+  width: 200px;
+  height: 200px; */
+  /* you need to match the shadow color to your background or image border for the desired effect*/
+  box-shadow: 10px 0 8px 8px pink inset;
+}
+
+.center-menu {
+  justify-content: space-around;
+  margin: auto;
+}
+
+.right-menu {
+  justify-content: right;
+  display: contents;
+}
+
+.margin {
+  margin: auto;
 }
 </style>

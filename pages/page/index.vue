@@ -4,10 +4,8 @@
       <nuxt-link :to="`/page/${m.title}`">{{ m.title }}</nuxt-link>
       <p>{{ m.page }}</p>
     </ul>
-    <!-- {{ page }} -->
-    <!-- <page> -->
+
     <nuxt-content :document="page" />
-    <!-- </page> -->
 
     <div class="blog container mx-auto">
       <section class="grid grid-cols-3 gap-4 pt-12">
