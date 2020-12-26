@@ -254,6 +254,10 @@ image {
   border-color: #99d6f7;
 }
 
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  background-color: #fff7fd;
+}
+
 .description {
   padding: 0px 67px -1px 0px;
   font-size: 14px;
