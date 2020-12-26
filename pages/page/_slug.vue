@@ -4,8 +4,8 @@
       <v-row>
         <!-- post text w/ border-->
         <v-col :class="{ 'page-border': $vuetify.breakpoint.mdAndUp }">
-          <v-card-text class="title_color">
-            {{ page.title }}
+          <v-card-text>
+            <div class="title_color">{{ page.title }}</div>
           </v-card-text>
           <v-card-text>
             <nuxt-content :document="page" />
@@ -24,7 +24,7 @@
         </v-col>
 
         <!-- page media section  -->
-        <v-col cols="auto" md="6" lg="6" sm="12" xs="12">
+        <v-col class="main-cols" cols="auto" md="6" lg="6" sm="12" xs="12">
           <v-card
             :class="{ 'fade-window': $vuetify.breakpoint.smAndUp }"
             flat
@@ -127,7 +127,7 @@ export default {
   name: 'Page',
   // Dynamically create this page based on contents on component folder
   async asyncData({ $content, params, error }) {
-    const slug = params.slug || 'home'
+    const slug = params.slug
     const page = await $content('page/' + slug)
       .fetch()
       .catch((err) => {
@@ -252,6 +252,7 @@ image {
 .page-border {
   border-right-style: outset;
   border-color: #99d6f7;
+  background-color: #fff7fd;
 }
 
 .v-sheet.v-card:not(.v-sheet--outlined) {
@@ -280,6 +281,14 @@ image {
   width: 1em;
   background: #fff7fd;
   display: inline !important;
+}
+
+.main-cols {
+  background-color: #fff7fd;
+}
+
+.fade-window {
+  background-color: #fff7fd;
 }
 
 .fade-window:after {

@@ -34,7 +34,7 @@
 <script>
 export default {
   async asyncData({ $content, params, error }) {
-    const slug = params.page || 'main/home'
+    const slug = params.page
     const page = await $content(slug)
       .fetch()
       .catch((err) => {
