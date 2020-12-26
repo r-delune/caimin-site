@@ -52,17 +52,7 @@ export default {
     '@nuxtjs/vuetify',
     '@nuxt/components',
   ],
-
-  components: true, 
-
-  // /*
-  //  ** Nuxt content renderer
-  //  */
-  // content: {
-  //   apiPrefix: 'pages',
-  //   dir: 'content/pages',
-  //   liveEdit: false,
-  // },
+  components: true,
   /*
    ** Allow parsing of markdown files
    */

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <v-app-bar app> -->
     <v-container>
       <v-row class="title_card">
         <v-col
@@ -47,10 +46,8 @@
         </v-col>
       </v-row>
     </v-container>
-    <!-- </v-app-bar> -->
     <v-main>
       <v-container fluid>
-        <!-- <div class="image-blurred-edge"></div> -->
         <nuxt />
       </v-container>
     </v-main>
@@ -91,24 +88,11 @@ body {
   background-color: #fff7fd;
 }
 
-/* .v-btn:hover:before {
-  background-color: transparent;
-} */
-
 .title_card {
   border-bottom: 3px solid #aaa;
   border-color: #1fb0ff;
-  padding: 38px 4px 2px 0px;
+  padding: 18px 4px 2px 0px;
 }
-
-/* .v-application {
-  background-color: green;
-} */
-
-/* .v-application--wrap {
-  min-height: 100vh;
-  justify-content: center;
-} */
 
 .menu-items {
   display: flex;
@@ -151,10 +135,6 @@ body {
 }
 
 .image-blurred-edge {
-  /* background-image: url('http://lorempixel.com/200/200/city/9');
-  width: 200px;
-  height: 200px; */
-  /* you need to match the shadow color to your background or image border for the desired effect*/
   box-shadow: 10px 0 8px 8px pink inset;
 }
 

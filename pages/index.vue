@@ -1,10 +1,11 @@
 <template>
   <v-container>
     <v-row>
+      <!-- main title content -->
       <v-col column>
         <nuxt-content :document="page" />
       </v-col>
-
+      <!-- list of posts -->
       <v-container>
         <v-row>
           <v-col
@@ -16,8 +17,7 @@
             sm="6"
             column
           >
-            <!-- <span class="blur-box-inner"> </span> -->
-
+            <!-- single post -->
             <v-hover class="my-overlay" @click.native="clickMe(post.path)">
               <template #default="{ hover }">
                 <v-card :elevation="0" class="d-flex flex-column">
@@ -29,7 +29,7 @@
                       :alt="altImage"
                     />
                   </div>
-
+                  <!-- overlay -->
                   <v-fade-transition>
                     <v-overlay
                       v-if="hover"
@@ -38,9 +38,7 @@
                       color="#036358"
                       @click.native="clickMe(post.path)"
                     >
-                      <!-- {{ post }} -->
                       <div class="panel-text">{{ post.title }}</div>
-                      <!-- <v-btn :to="post.path" text nuxt>{{ post.title }}</v-btn> -->
                     </v-overlay>
                   </v-fade-transition>
                 </v-card>
@@ -76,14 +74,13 @@ export default {
     }
   },
   methods: {
+    // get the correct image path
     getImg(img) {
       var path = img.split('/images/').pop()
       return `/images/${path}`
     },
+    // go to path todo: inline
     clickMe(path) {
-      console.log('click me', path)
-
-      console.log('going fome')
       this.$router.push({
         path: path,
       })
@@ -93,21 +90,6 @@ export default {
 </script>
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
-  transition-property: opacity;
-  transition-timing-function: ease-in-out;
-  transition-duration: 400ms;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.text_color {
-  color: #1fb0ff;
-}
-
 .my-overlay {
   cursor: pointer;
 }
@@ -128,9 +110,6 @@ export default {
 }
 
 .nuxt-content p {
-  /* color: grey;
-  font-size: 16px; */
   padding: 0px 67px -1px 0px;
-  /* font-family: 'Alte Haas Grotesk 700'; */
 }
 </style>
