@@ -1,39 +1,62 @@
 <template>
-  <v-container>
-    <v-card :color="'red'" flat>
-      <v-row>
+  <v-container
+    fluid
+    :class="$vuetify.breakpoint.smAndDown ? 'test mx-0 px-0' : 'mx-0 px-0'"
+  >
+    <v-card
+      flat
+      :class="!$vuetify.breakpoint.smAndDown ? 'x-5 px-0 pt-0 pa-4' : ''"
+    >
+      <v-row
+        :class="!$vuetify.breakpoint.smAndDown ? 'mx-5 px-5 pt-0' : 'mx-0 px-0'"
+      >
         <!-- post text w/ border-->
-        <v-col :class="{ 'page-border': $vuetify.breakpoint.mdAndUp }">
-          <v-card-text>
-            <div class="title_color">{{ page.title }}</div>
-          </v-card-text>
-          <v-card-text>
+        <v-col
+          class="pt-0"
+          :class="!$vuetify.breakpoint.smAndDown ? 'page-border ' : 'mx-0 px-0'"
+        >
+          <div class="title_color px-1 pa-0 pt-0">{{ page.title }}</div>
+          <div class="px-1 pt-0 pr-4">
             <nuxt-content :document="page" />
-          </v-card-text>
-          <v-spacer></v-spacer>
 
-          <v-btn
-            v-if="$vuetify.breakpoint.smAndUp"
-            class="btn-link"
-            text
-            :to="'/'"
-          >
-            <v-icon left> mdi-arrow-left </v-icon>
-            Back
-          </v-btn>
+            <v-spacer></v-spacer>
+          </div>
+
+          <div class="pa-0 pt-3 px-0">
+            <v-btn
+              v-if="!$vuetify.breakpoint.smAndDown"
+              class="btn-link color pt-2"
+              text
+              :to="'/'"
+            >
+              <v-icon left> mdi-arrow-left </v-icon>
+              Back
+            </v-btn>
+          </div>
         </v-col>
 
         <!-- page media section  -->
-        <v-col class="main-cols" cols="auto" md="6" lg="6" sm="12" xs="12">
+        <v-col
+          :class="
+            !$vuetify.breakpoint.smAndDown ? 'pa-1 pl-4 pt-4 main-cols' : 'mx-5'
+          "
+          cols="auto"
+          md="6"
+          lg="6"
+          sm="12"
+          xs="12"
+        >
           <v-card
-            :class="{ 'fade-window': $vuetify.breakpoint.smAndUp }"
             flat
+            :class="
+              !$vuetify.breakpoint.smAndDown ? 'fade-window pa-0' : 'mx-0 px-0'
+            "
             height="620px"
           >
             <div
               id="my-window"
               :ref="'my-window'"
-              :class="{ scroller: $vuetify.breakpoint.mdAndUp }"
+              :class="{ scroller: !$vuetify.breakpoint.smAndDown }"
             >
               <!-- display all videos if the exist -->
               <div v-if="page.video">
@@ -41,25 +64,36 @@
                   v-for="(video, index) in page.video"
                   :ref="'video' + index"
                   :key="`${index}`"
+                  :class="
+                    !$vuetify.breakpoint.smAndDown ? '' : 'mx-0 px-1 pt-3'
+                  "
                 >
                   <Video :video="video.video_id"></Video>
-                  <v-card-text>
-                    <div>Video Description text not done yet</div>
-                  </v-card-text>
+
+                  <div class="color description pt-2">
+                    {{ video.description }}
+                  </div>
                 </v-col>
               </div>
 
               <!-- display explandable image -->
-              <v-col v-for="(post, index) in page.images" :key="`${index}`">
-                <div v-if="page.img">
+              <v-col
+                v-for="(post, index) in page.images"
+                :key="`${index}`"
+                :class="!$vuetify.breakpoint.smAndDown ? 'pt-3' : 'mx-0 px-1'"
+              >
+                <div v-if="post.img">
                   <expandable-image
                     :ref="'image' + index"
                     class="image"
+                    max-width="200px"
                     :src="getImg(post.img)"
                     :alt="altImage"
                   ></expandable-image>
 
-                  <div class="description">{{ post.description }}</div>
+                  <div v-if="post.description" class="color description pt-2">
+                    {{ post.description }}
+                  </div>
 
                   <v-divider></v-divider>
                 </div>
@@ -73,7 +107,7 @@
                 >
                   <iframe
                     :ref="'audio' + index"
-                    width="100%"
+                    width="90%"
                     height="166"
                     scrolling="no"
                     frameborder="no"
@@ -81,9 +115,11 @@
                     :src="post.link"
                   ></iframe>
                 </v-col>
+                <div class="color description pt-2">
+                  {{ post }}
+                </div>
+                <v-divider></v-divider>
               </div>
-
-              <v-divider></v-divider>
             </div>
           </v-card>
         </v-col>
@@ -242,17 +278,23 @@ export default {
 .title_color {
   color: #1fb0ff;
   font-size: xx-large;
-  font-weight: bold;
+  text-decoration: underline;
+  font-family: 'Alte Haas Grotesk 700';
+  font-size: 23px;
+  padding: 12px;
 }
 
 image {
-  width: 195%;
+  width: 200%;
   height: 300px;
 }
+
 .page-border {
   border-right-style: outset;
-  border-color: #99d6f7;
-  background-color: #fff7fd;
+  border-color: #1fb0ff9c;
+  border-width: 2px;
+
+  /* background-color: #fff7fd; */
 }
 
 .v-sheet.v-card:not(.v-sheet--outlined) {
@@ -260,8 +302,8 @@ image {
 }
 
 .description {
-  padding: 0px 67px -1px 0px;
-  font-size: 14px;
+  padding: 30px 67px -1px 0px;
+  font-size: 15px;
 }
 
 .v-card {
@@ -289,6 +331,12 @@ image {
 
 .fade-window {
   background-color: #fff7fd;
+  padding: 0px 30px;
+}
+
+.color {
+  color: #1fb0ff !important;
+  font-family: 'Alte Haas Grotesk';
 }
 
 .fade-window:after {
@@ -305,5 +353,22 @@ image {
   );
   width: 100%;
   height: 4em;
+}
+
+.nuxt-content p {
+  color: #1fb0ff;
+  font-family: 'Alte Haas Grotesk';
+  font-size: 18px;
+  letter-spacing: 0.03em;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  line-height: 1.35em;
+  font-family: 'Alte Haas Grotesk';
+  font-size: 18px;
+  font-weight: 400;
+  /* padding: 0px 67px -1px 0px; */
 }
 </style>

@@ -124,6 +124,7 @@ collections:
                     required: false,
                     widget: 'string',
                 }
+              - { label: 'Description', name: 'description', widget: 'text' }
 
         # Multiple Choice Question
         - label: 'Video Linker'
@@ -136,7 +137,7 @@ collections:
                     required: false,
                     widget: 'string',
                 }
-
+              - { label: 'Description', name: 'description', widget: 'text' }
         # Further Resources
         - label: 'Links'
           name: 'links'

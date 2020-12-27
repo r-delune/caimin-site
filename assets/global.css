@@ -2,17 +2,23 @@
     font-family: "Alte4";
     src: local("Alte4"),
      url(~assets/fonts/Alte4.ttf) format("ttf");
+     font-weight: normal;
+     font-style: normal;
 }
 
 @font-face {
     font-family: "Alte7";
     src: local("Alte7"),
      url(~assets/fonts/Alte7.ttf) format("ttf");
+     font-weight: normal;
+     font-style: normal;
 }
 
 
 html {
     font-family: "Alte4";
     background-color: lawngreen;
+    font-weight: normal;
+    font-style: normal;
 }
 

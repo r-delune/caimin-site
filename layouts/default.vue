@@ -1,19 +1,31 @@
 <template>
   <div>
-    <v-container>
-      <v-row class="title_card">
+    <v-container
+      fluid
+      :class="$vuetify.breakpoint.smAndDown ? 'mx-0' : 'mx-3 test4'"
+    >
+      <v-row
+        class="title_card"
+        :class="$vuetify.breakpoint.smAndDown ? 'mx-1' : 'mx-5'"
+      >
         <v-col
-          :class="$vuetify.breakpoint.mobile ? 'center-menu' : 'right-menu'"
+          :class="$vuetify.breakpoint.smAndDown ? 'center-menu ' : 'right-menu'"
           cols="auto"
-          class="site_name"
+          class="site_name pa-2"
         >
-          <div class="margin" @click="goHome()">CAIMIN WALSH</div></v-col
+          <div
+            :class="$vuetify.breakpoint.smAndDown ? 'margin-small ' : ''"
+            class="margin"
+            @click="goHome()"
+          >
+            CAIMIN WALSH
+          </div></v-col
         >
-        <v-spacer v-if="!$vuetify.breakpoint.mobile"></v-spacer>
+        <v-spacer v-if="!$vuetify.breakpoint.smAndDown"></v-spacer>
 
         <v-col
           class="menu-items"
-          :class="$vuetify.breakpoint.mobile ? 'center-menu' : 'right-menu'"
+          :class="$vuetify.breakpoint.smAndDown ? 'center-menu' : 'right-menu'"
         >
           <div
             class="my-button"
@@ -47,7 +59,10 @@
       </v-row>
     </v-container>
     <v-main>
-      <v-container fluid>
+      <v-container
+        fluid
+        :class="$vuetify.breakpoint.smAndDown ? 'mx-1' : 'mx-3'"
+      >
         <nuxt />
       </v-container>
     </v-main>
@@ -89,9 +104,9 @@ body {
 }
 
 .title_card {
-  border-bottom: 3px solid #aaa;
+  border-bottom: 2px solid #aaa;
   border-color: #1fb0ff;
-  padding: 18px 4px 2px 0px;
+  padding: 25px 0px 0px 0px;
 }
 
 .menu-items {
@@ -100,11 +115,11 @@ body {
   font-family: 'Alte Haas Grotesk 700';
   color: #1fb0ff;
   text-transform: capitalize;
-  font-size: 24px;
+  font-size: 23px;
 }
 
 .my-button {
-  padding: 23px 10px 7px;
+  padding: 25px 10px 0px;
   cursor: pointer;
 }
 
@@ -150,5 +165,13 @@ body {
 
 .margin {
   margin: auto;
+}
+
+.margin-small {
+  display: table-caption;
+}
+
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: none;
 }
 </style>
